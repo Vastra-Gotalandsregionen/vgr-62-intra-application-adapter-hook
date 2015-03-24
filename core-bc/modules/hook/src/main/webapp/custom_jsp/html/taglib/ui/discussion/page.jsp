@@ -323,11 +323,37 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 							<aui:row fluid="<%= true %>">
 								<aui:col cssClass="lfr-discussion-details" width="15">
+
+									<%-- Start custom changed --%>
+									<%--
 									<liferay-ui:user-display
 										displayStyle="<%= 2 %>"
 										userId="<%= message.getUserId() %>"
 										userName="<%= HtmlUtil.escape(message.getUserName()) %>"
 									/>
+									--%>
+
+									<%
+									String taglibAlt = (user != null) ? HtmlUtil.escapeAttribute(user.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait");
+									String taglibSrc = null;
+
+									if (user != null) {
+										taglibSrc = user.getPortraitURL(themeDisplay);
+									}
+									else {
+										taglibSrc = UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0);
+									}
+
+									%>
+									<div class="taglib-user-display display-style-2">
+										<span class="user-profile-image">
+											<img alt="<%= taglibAlt %>" class="avatar" src="<%= HtmlUtil.escape(taglibSrc) %>" width="65" />
+										</span>
+									</div>
+
+									<%-- End custom changed --%>
+
+
 								</aui:col>
 
 								<aui:col cssClass="lfr-discussion-body" width="85">
@@ -343,11 +369,11 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<div class="discussion-message-top">
 
 										<%-- Start custom added --%>
-										<liferay-ui:user-display
-											displayStyle="<%= 2 %>"
-											userId="<%= message.getUserId() %>"
-											userName="<%= HtmlUtil.escape(message.getUserName()) %>"
-										/>
+										<div class="taglib-user-display display-style-2">
+											<span class="user-name">
+												<%= HtmlUtil.escape(PortalUtil.getUserName(user.getUserId(), StringPool.BLANK)) %>
+											</span>
+										</div>
 										<%-- End custom added --%>
 
 										<%-- Start custom moved --%>
@@ -361,18 +387,23 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 													<%
 													MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
 
-													StringBundler sb = new StringBundler(7);
+													// Start custom changed
+													//StringBundler sb = new StringBundler(7);
 
-													sb.append("<a href=\"#");
-													sb.append(randomNamespace);
-													sb.append("message_");
-													sb.append(parentMessage.getMessageId());
-													sb.append("\">");
-													sb.append(HtmlUtil.escape(parentMessage.getUserName()));
-													sb.append("</a>");
+													//sb.append("<a href=\"#");
+													//sb.append(randomNamespace);
+													//sb.append("message_");
+													//sb.append(parentMessage.getMessageId());
+													//sb.append("\">");
+													//sb.append(HtmlUtil.escape(parentMessage.getUserName()));
+													//sb.append("</a>");
+
+													// End custom changed
 													%>
 
-													<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), sb.toString()}) %>
+													<span>
+														<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), HtmlUtil.escape(parentMessage.getUserName())}) %>
+													</span>
 												</c:otherwise>
 											</c:choose>
 										</div>
@@ -481,11 +512,43 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								<div class="lfr-discussion-form lfr-discussion-form-reply span12" id="<%= randomNamespace %>postReplyForm<%= i %>" style='display: none;' %>
 								<%-- End custom changed --%>
 
+								<%-- Start custom changed --%>
+
+									<%--
 									<liferay-ui:user-display
 										displayStyle="<%= 2 %>"
 										userId="<%= user.getUserId() %>"
 										userName="<%= HtmlUtil.escape(PortalUtil.getUserName(user.getUserId(), StringPool.BLANK)) %>"
 									/>
+									--%>
+
+									<%
+									String taglibAlt = (user != null) ? HtmlUtil.escapeAttribute(user.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait");
+									String taglibSrc = null;
+
+									if (user != null) {
+										taglibSrc = user.getPortraitURL(themeDisplay);
+									}
+									else {
+										taglibSrc = UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0);
+									}
+
+									String userName = HtmlUtil.escape(PortalUtil.getUserName(user.getUserId(), StringPool.BLANK));
+									%>
+
+									<div class="taglib-user-display display-style-2">
+
+										<span class="user-profile-image">
+											<img alt="<%= taglibAlt %>" class="avatar" src="<%= HtmlUtil.escape(taglibSrc) %>" width="65" />
+										</span>
+
+										<span class="user-name">
+											<%= userName %>
+										</span>
+
+									</div>
+
+									<%-- End custom changed --%>
 
 									<%-- Start custom changed --%>
 									<aui:input id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' wrap="soft" />

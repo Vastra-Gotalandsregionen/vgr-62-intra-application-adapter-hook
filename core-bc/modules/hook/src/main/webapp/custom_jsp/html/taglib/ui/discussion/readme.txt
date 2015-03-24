@@ -101,3 +101,9 @@
 
 
 * Commented out cancel button for add new (top form)
+
+* (2015-03-24). Commented out all uses of <liferay-ui:user-display>. Replaced with custom markup (copied from the user-display tag) but without the link to the user profile.
+This was done (instead of overriding user_display/start.jsp) since there appears to be a bug with application adapters and some tags. See:
+https://issues.liferay.com/browse/LPS-47462
+
+* (2015-03-24). Changed response message from including link (starting with sb.append("<a href=\"#");) to be just a span.
