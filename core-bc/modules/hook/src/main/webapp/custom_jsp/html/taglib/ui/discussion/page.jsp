@@ -334,11 +334,14 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									--%>
 
 									<%
-									String taglibAlt = (user != null) ? HtmlUtil.escapeAttribute(user.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait");
+
+									User messageUser = UserLocalServiceUtil.getUser(message.getUserId());
+
+									String taglibAlt = PortalUtil.getUserName(message.getUserId(), StringPool.BLANK);
 									String taglibSrc = null;
 
-									if (user != null) {
-										taglibSrc = user.getPortraitURL(themeDisplay);
+									if (messageUser != null) {
+										taglibSrc = messageUser.getPortraitURL(themeDisplay);
 									}
 									else {
 										taglibSrc = UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0);
@@ -371,7 +374,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 										<%-- Start custom added --%>
 										<div class="taglib-user-display display-style-2">
 											<span class="user-name">
-												<%= HtmlUtil.escape(PortalUtil.getUserName(user.getUserId(), StringPool.BLANK)) %>
+												<%= HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), StringPool.BLANK)) %>
 											</span>
 										</div>
 										<%-- End custom added --%>
