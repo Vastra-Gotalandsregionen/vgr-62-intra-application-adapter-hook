@@ -35,8 +35,36 @@ To:
 i.e. use the custom jsp file instead of the original
 
 ----------------------------------------------------------------------------------------------------
+- main_search_result_form.jsp
+----------------------------------------------------------------------------------------------------
+
+* Commented out asset-entry-type
+i.e. the section starting with:
+<span class="asset-entry-type">
+
+* Commented out asset-entry-tags
+i.e. the section starting with:
+<div class="asset-entry-tags">
+
+* Commented out asset-entry-categories
+i.e. the section starting with:
+<div class="asset-entry-categories">
+
+
+* Commented out view a href in asset-entry title
+
+<span class="asset-entry-title">
+  <a href="<%= viewURL %>">
+
+I.e. title not linked
+
+* Added view a href as a direct parent to <span class="asset-entry">
+
+----------------------------------------------------------------------------------------------------
 - File: /html/portlet/search/main_search.jspf
 ----------------------------------------------------------------------------------------------------
+
+
 
 * Changed
 <aui:col id="facetNavigation" span="2">
@@ -49,3 +77,11 @@ to:
 
 to:
 <aui:col cssClass="result" first="<%= !showMenu %>" span="9">
+
+* Changed
+<liferay-ui:search-container-column-jsp path='<%= displayResultsInDocumentForm ? "/html/portlet/search/main_search_document_form.jsp" : "/html/portlet/search/main_search_result_form.jsp" %>' />
+
+To use the hook jsp for main_search_document_form.jsp
+
+That is, changed to:
+<liferay-ui:search-container-column-jsp path='<%= displayResultsInDocumentForm ? "/html/portlet/search/main_search_document_form.jsp" : "/html/portlet/search/main_search_result_form.vgr-62-intra-application-adapter-hook.jsp" %>' />

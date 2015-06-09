@@ -169,7 +169,12 @@ boolean showMenu = advancedConfiguration || displayScopeFacet || displayAssetTyp
 				modelVar="document"
 				stringKey="<%= true %>"
 			>
+				<%-- Start custom changed --%>
+				<%--
 				<liferay-ui:search-container-column-jsp path='<%= displayResultsInDocumentForm ? "/html/portlet/search/main_search_document_form.jsp" : "/html/portlet/search/main_search_result_form.jsp" %>' />
+				--%>
+				<liferay-ui:search-container-column-jsp path='<%= displayResultsInDocumentForm ? "/html/portlet/search/main_search_document_form.jsp" : "/html/portlet/search/main_search_result_form.vgr-62-intra-application-adapter-hook.jsp" %>' />
+				<%-- End custom changed --%>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator type="more" />
