@@ -66,7 +66,11 @@ request.setAttribute("search.jsp-returnToFullPageURL", portletDisplay.getURLBack
 		<aui:button cssClass="btn" name="search" value="search" type="submit" />
 		<%-- End custom changed --%>
 
+		<%-- Start custom changed --%>
+		<%--
 		<aui:input inlineField="<%= true %>" label="" name="clearSearch" src='<%= themeDisplay.getPathThemeImages() + "/common/close.png" %>' title="clear-search" type="image" />
+		--%>
+		<%-- End custom changed --%>
 	</aui:fieldset>
 
 	<div class="lfr-token-list" id="<portlet:namespace />searchTokens">

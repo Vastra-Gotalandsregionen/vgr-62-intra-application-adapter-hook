@@ -34,6 +34,11 @@ To:
 
 i.e. use the custom jsp file instead of the original
 
+* Commented out the following line:
+<aui:input inlineField="<%= true %>" label="" name="clearSearch" src='<%= themeDisplay.getPathThemeImages() + "/common/close.png" %>' title="clear-search" type="image" />
+
+
+
 ----------------------------------------------------------------------------------------------------
 - main_search_result_form.jsp
 ----------------------------------------------------------------------------------------------------
